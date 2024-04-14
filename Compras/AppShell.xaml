@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<Shell
+    x:Class="Compras.AppShell"
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:local="clr-namespace:Compras.Views"
+    Title="Compras"
+    Shell.FlyoutBehavior="Disabled">
+
+    <TabBar>
+        <ShellContent
+            Title="Listas"
+            ContentTemplate="{DataTemplate local:ListaCompras}"
+            Icon="icon_lista.png"
+            Route="ListaCompras" />
+
+        <ShellContent
+            Title="Perfil"
+            ContentTemplate="{DataTemplate local:Perfil}"
+            Icon="icon_perfil.png"
+            Route="Perfil" />
+    </TabBar>
+</Shell>
+
+
+
+
