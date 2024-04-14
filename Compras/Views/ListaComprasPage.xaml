@@ -3,6 +3,7 @@
     x:Class="Compras.Views.ListaCompras"
     xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:components="clr-namespace:Compras.Libraries.Components"
     xmlns:vm="clr-namespace:Compras.ViewModels"
     Title="ListaCompras">
     <ContentPage.BindingContext>
@@ -18,6 +19,56 @@
         </StackLayout>
 
         <CollectionView Grid.Row="1" ItemsSource="{Binding ListaCompras}">
+            <CollectionView.ItemTemplate>
+                <DataTemplate>
+                    <Grid ColumnDefinitions="90, *, 80" RowDefinitions="1, Auto, 1, 35, 1">
+                        <components:HorizontalLine Grid.ColumnSpan="3" Stroke="Gray" />
+                        <Image
+                            Grid.Row="1"
+                            Margin="15,10,10,0"
+                            HeightRequest="64"
+                            Source="my_list.png" />
+                        <VerticalStackLayout
+                            Grid.Row="1"
+                            Grid.Column="1"
+                            Margin="15,0,0,0"
+                            VerticalOptions="Center">
+                            <Label Style="{StaticResource Paragraph}" Text="{Binding Name}" />
+                            <HorizontalStackLayout>
+                                <Label Style="{StaticResource SmallText}" Text="{Binding Products.Count}" />
+                                <Label Style="{StaticResource SmallText}" Text=" itens - " />
+                                <Label Style="{StaticResource SmallTextEmpashis}" Text="{Binding Users.Count}" />
+                            </HorizontalStackLayout>
+                        </VerticalStackLayout>
+                        <Label
+                            Grid.Row="1"
+                            Grid.Column="2"
+                            Text="R$ 55,00"
+                            VerticalOptions="Center" />
+                        <components:HorizontalLine
+                            Grid.Row="2"
+                            Grid.ColumnSpan="3"
+                            Stroke="LightGray" />
+                        <HorizontalStackLayout Grid.Row="3" Grid.ColumnSpan="3">
+                            <Button
+                                ImageSource="share.png"
+                                Style="{StaticResource ButtonBorderless}"
+                                Text="Compartilhar" />
+                            <Button
+                                ImageSource="delete.png"
+                                Style="{StaticResource ButtonBorderless}"
+                                Text="Excluir" />
+                        </HorizontalStackLayout>
+
+                        <components:HorizontalLine
+                            Grid.Row="4"
+                            Grid.ColumnSpan="3"
+                            Stroke="Gray" />
+
+                    </Grid>
+
+                </DataTemplate>
+            </CollectionView.ItemTemplate>
             <CollectionView.EmptyView>
                 <Label
                     HorizontalOptions="CenterAndExpand"
