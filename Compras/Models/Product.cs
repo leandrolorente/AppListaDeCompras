@@ -16,6 +16,8 @@ namespace Compras.Models
         public string QuantityUnitMeasure { get; set; } = string.Empty;
 
         public decimal Price { get; set; }
+
+        public bool HasCaught { get; set; } = false;
        
 
       

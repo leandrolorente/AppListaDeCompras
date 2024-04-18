@@ -1,4 +1,5 @@
 ﻿using Microsoft.Extensions.Logging;
+using Mopups.Hosting;
 
 namespace Compras
 {
@@ -9,6 +10,7 @@ namespace Compras
             var builder = MauiApp.CreateBuilder();
             builder
                 .UseMauiApp<App>()
+                .ConfigureMopups()
                 .ConfigureFonts(fonts =>
                 {
                     fonts.AddFont("Poppins-Light.ttf", "PoppinsLight");

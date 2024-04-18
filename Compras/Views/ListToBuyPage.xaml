@@ -1,13 +1,20 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <ContentPage
-    x:Class="Compras.Views.ListaCompras"
+    x:Class="Compras.Views.ListToBuyPage"
     xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     xmlns:components="clr-namespace:Compras.Libraries.Components"
+    xmlns:converters="clr-namespace:Compras.Libraries.Converters"
     xmlns:vm="clr-namespace:Compras.ViewModels"
     Title="ListaCompras">
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <converters:TextSharedListConverter x:Key="TextSharedListConverter" />
+            <converters:TextTotalPriceOfCartConverter x:Key="TextTotalPriceOfCartConverter" />
+        </ResourceDictionary>
+    </ContentPage.Resources>
     <ContentPage.BindingContext>
-        <vm:ListaComprasViewModel />
+        <vm:ListToBuyViewModel x:Name="vm" />
     </ContentPage.BindingContext>
     <Grid RowDefinitions="75, *">
         <StackLayout Padding="10" Orientation="Horizontal">
@@ -19,38 +26,42 @@
         </StackLayout>
 
         <CollectionView Grid.Row="1" ItemsSource="{Binding ListaCompras}">
+            <CollectionView.Header>
+                <components:HorizontalLine Grid.ColumnSpan="3" Stroke="Gray" />
+            </CollectionView.Header>
             <CollectionView.ItemTemplate>
                 <DataTemplate>
-                    <Grid ColumnDefinitions="90, *, 80" RowDefinitions="1, Auto, 1, 35, 1">
-                        <components:HorizontalLine Grid.ColumnSpan="3" Stroke="Gray" />
+                    <Grid ColumnDefinitions="90, *, 80" RowDefinitions=" Auto, 1, 35, 1">
+
                         <Image
-                            Grid.Row="1"
+                            Grid.Row="0"
                             Margin="15,10,10,0"
                             HeightRequest="64"
                             Source="my_list.png" />
                         <VerticalStackLayout
-                            Grid.Row="1"
+                            Grid.Row="0"
                             Grid.Column="1"
                             Margin="15,0,0,0"
                             VerticalOptions="Center">
                             <Label Style="{StaticResource Paragraph}" Text="{Binding Name}" />
                             <HorizontalStackLayout>
                                 <Label Style="{StaticResource SmallText}" Text="{Binding Products.Count}" />
-                                <Label Style="{StaticResource SmallText}" Text=" itens - " />
-                                <Label Style="{StaticResource SmallTextEmpashis}" Text="{Binding Users.Count}" />
+                                <Label Style="{StaticResource SmallText}" Text=" itens " />
+                                <Label Style="{StaticResource SmallTextEmpashis}" Text="{Binding Users.Count, Converter={StaticResource TextSharedListConverter}}" />
                             </HorizontalStackLayout>
                         </VerticalStackLayout>
                         <Label
-                            Grid.Row="1"
+                            Grid.Row="0"
                             Grid.Column="2"
-                            Text="R$ 55,00"
+                            Text="{Binding ., Converter={StaticResource TextTotalPriceOfCartConverter}}"
                             VerticalOptions="Center" />
                         <components:HorizontalLine
-                            Grid.Row="2"
+                            Grid.Row="1"
                             Grid.ColumnSpan="3"
                             Stroke="LightGray" />
-                        <HorizontalStackLayout Grid.Row="3" Grid.ColumnSpan="3">
+                        <HorizontalStackLayout Grid.Row="2" Grid.ColumnSpan="3">
                             <Button
+                                Command="{Binding OpenPopupSharePageCommand, Source={x:Reference vm}}"
                                 ImageSource="share.png"
                                 Style="{StaticResource ButtonBorderless}"
                                 Text="Compartilhar" />
@@ -61,7 +72,7 @@
                         </HorizontalStackLayout>
 
                         <components:HorizontalLine
-                            Grid.Row="4"
+                            Grid.Row="3"
                             Grid.ColumnSpan="3"
                             Stroke="Gray" />
 

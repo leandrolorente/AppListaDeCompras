@@ -10,7 +10,7 @@
     <TabBar>
         <ShellContent
             Title="Listas"
-            ContentTemplate="{DataTemplate local:ListaCompras}"
+            ContentTemplate="{DataTemplate local:ListToBuyPage}"
             Icon="icon_lista.png"
             Route="ListaCompras" />
 
