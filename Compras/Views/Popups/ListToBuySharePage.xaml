@@ -4,12 +4,49 @@
     xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     xmlns:mopups="clr-namespace:Mopups.Pages;assembly=Mopups"
+    xmlns:components="clr-namespace:Compras.Libraries.Components"
+    xmlns:vm="clr-namespace:Compras.ViewModels"
     Title="ListToBuySharePage"
-    BackgroundColor="Blue">
-    <VerticalStackLayout>
-        <Label
-            HorizontalOptions="Center"
-            Text="Compartilhar"
-            VerticalOptions="Center" />
-    </VerticalStackLayout>
+    BackgroundColor="#AA000000">
+    <mopups:PopupPage.BindingContext>
+        <vm:ListToBuySharePageViewModel />
+    </mopups:PopupPage.BindingContext>
+    <Border
+        
+        BackgroundColor="White"
+        HeightRequest="399"
+        StrokeShape="RoundRectangle 12"
+        StrokeThickness="0"
+        WidthRequest="360">
+        <VerticalStackLayout Spacing="10">
+           <VerticalStackLayout Padding="20"> 
+            <StackLayout Orientation="Horizontal" >
+                <Label
+                    Style="{StaticResource SmallHeadline}"
+                    HorizontalOptions="CenterAndExpand" 
+                    Text="Compartilhar"
+                    VerticalOptions="Center" />
+                <ImageButton Source="close.png" Command="{Binding CloseCommand}"  />
+            </StackLayout>
+
+            
+                <Entry Placeholder="E-mail" />
+                <Button Text="Adicionar " />
+            </VerticalStackLayout>
+
+            <CollectionView ItemsSource="{Binding List.Users}">
+                <CollectionView.ItemTemplate>
+                    <DataTemplate>
+                        <VerticalStackLayout>
+                          <components:HorizontalLine Stroke="LightGray"/>
+                            <Label Style="{StaticResource Paragraph}" Padding="20,0" Text="{Binding Name}"/>
+                            <Label Style="{StaticResource Paragraph}" Padding="20,0" Text="{Binding Email}"/>
+
+                        </VerticalStackLayout>
+                    </DataTemplate>
+                </CollectionView.ItemTemplate>
+            </CollectionView>
+
+        </VerticalStackLayout>
+    </Border>
 </mopups:PopupPage>

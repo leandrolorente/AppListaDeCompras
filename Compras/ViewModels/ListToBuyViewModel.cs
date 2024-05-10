@@ -58,9 +58,9 @@ namespace Compras.ViewModels
 
         // TO DO - colocar parametro "listtobuy"
         [RelayCommand]
-        private void OpenPopupSharePage()
+        private void OpenPopupSharePage(ListaCompras selectedList)
         {
-            MopupService.Instance.PushAsync(new ListToBuySharePage());
+            MopupService.Instance.PushAsync(new ListToBuySharePage(selectedList));
         }
 
     }
