@@ -12,13 +12,12 @@
         <vm:ListToBuySharePageViewModel />
     </mopups:PopupPage.BindingContext>
     <Border
-        
         BackgroundColor="White"
         HeightRequest="399"
         StrokeShape="RoundRectangle 12"
         StrokeThickness="0"
         WidthRequest="360">
-        <VerticalStackLayout Spacing="10">
+        <VerticalStackLayout  >
            <VerticalStackLayout Padding="20" Spacing="10"> 
             <StackLayout Orientation="Horizontal" >
                 <Label

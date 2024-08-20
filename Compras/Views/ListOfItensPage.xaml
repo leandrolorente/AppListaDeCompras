@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="Compras.Views.ListOfItensPage"
+             xmlns:components="clr-namespace:Compras.Libraries.Components"
+             xmlns:converters="clr-namespace:Compras.Libraries.Converters"
+             xmlns:vm="clr-namespace:Compras.ViewModels"
+             Title="ListOfItensPage">
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <converters:TextSharedListConverter x:Key="TextSharedListConverter" />
+            <converters:TextTotalPriceOfCartConverter x:Key="TextTotalPriceOfCartConverter" />
+        </ResourceDictionary>
+    </ContentPage.Resources>
+    <ContentPage.BindingContext>
+        <vm:ListOfItensPageViewModel/>
+    </ContentPage.BindingContext>
+    <Grid RowDefinitions="75, *, 1, 75">
+        <StackLayout Padding="10" Orientation="Horizontal">
+            <ImageButton HeightRequest="37" Source="back.png" />
+            <Entry
+             Margin="15,0,0,0"
+             HorizontalOptions="FillAndExpand"
+             Placeholder="Pesquisar"
+             Text="{Binding ListToBuy.Name}"
+                />
+        </StackLayout>
+
+        <CollectionView Grid.Row="1" ItemsSource="{Binding ListToBuy.Products}">
+            <CollectionView.Header>
+                <components:HorizontalLine Grid.ColumnSpan="3" Stroke="Gray" />
+            </CollectionView.Header>
+            <CollectionView.ItemTemplate>
+                <DataTemplate>
+                    <Grid ColumnDefinitions="90, *, 80" RowDefinitions=" Auto, 1">
+
+                        <CheckBox />
+                        <VerticalStackLayout
+                         
+                         Grid.Column="1"
+                         Margin="15,15,0,15"
+                         VerticalOptions="Center">
+                            <Label Style="{StaticResource Paragraph}" Text="{Binding Name}" />
+                            <HorizontalStackLayout>
+                                <Label Style="{StaticResource SmallText}" Text="Quantidade: " />
+                                <Label Style="{StaticResource SmallText}" Text="{Binding Quantity}" />
+                                <Label Style="{StaticResource SmallText}" Text="{Binding QuantityUnitMeasure} " />
+                        
+                            </HorizontalStackLayout>
+                        </VerticalStackLayout>
+                        <Label
+                         
+                         Grid.Column="2"
+                         Text="{Binding Price}"
+                         VerticalOptions="Center" />
+
+                        <components:HorizontalLine Grid.Row="1" Grid.ColumnSpan="3" Stroke="Gray" />
+                    </Grid>
+
+                </DataTemplate>
+            </CollectionView.ItemTemplate>
+            <CollectionView.EmptyView>
+                <Label
+                 HorizontalOptions="CenterAndExpand"
+                 Style="{StaticResource Paragraph}"
+                 Text="Nenhuma lista de compras"
+                 VerticalOptions="CenterAndExpand" />
+            </CollectionView.EmptyView>
+        </CollectionView>
+        
+        
+        <Button
+         Grid.Row="1"
+         Margin="20"
+         HorizontalOptions="End"
+         Text="+"
+         VerticalOptions="End" />
+
+        <components:HorizontalLine Grid.Row="2" Stroke="LightGray"/>
+        <Grid Grid.Row="3" ColumnDefinitions="*,*,*">
+            
+                <VerticalStackLayout Grid.Column="0" Spacing="10">
+                    <Label Text="Lista (0 Itens)"/>
+                    <Label Text="Falta 0 Itens"/>
+                </VerticalStackLayout>
+                
+                <VerticalStackLayout Grid.Column="1">
+                    <Label Text="Carrinho"/>
+                    <Label Text="0 Itens"/>
+                </VerticalStackLayout>
+                
+                <VerticalStackLayout Grid.Column="2">
+                    <Label Text="Total"/>
+                    <Label Text="R$ 0,00"/>
+                </VerticalStackLayout>
+                
+           
+            
+        </Grid>
+    </Grid>
+</ContentPage>
