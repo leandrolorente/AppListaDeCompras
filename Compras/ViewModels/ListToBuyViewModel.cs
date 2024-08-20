@@ -56,7 +56,7 @@ namespace Compras.ViewModels
         }
 
 
-        // TO DO - colocar parametro "listtobuy"
+      
         [RelayCommand]
         private void OpenPopupSharePage(ListaCompras selectedList)
         {
